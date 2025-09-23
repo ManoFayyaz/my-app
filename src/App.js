@@ -1,13 +1,15 @@
 // import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/Navbar';
-import Textarea from "./components/Textarea";
+import Todo from "./components/Todo";
+import Footer from './components/Footer';
 
 function App() {
   return (
     <>
-      <Navbar title="TextUtils" about="About TextUtils" /> 
-      <Textarea message="Type your text here"/>
+      <Navbar title="Todo List" about="About Todo List" /> 
+      <Todo message="Type your text here" msg={true}/>
+      <Footer title="Footer"/>
   </>
   );
 }

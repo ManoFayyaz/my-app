@@ -1,17 +1,22 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-export default function Textarea(props) {
+export default function Todo(props) {
   return (
-   <div class="form-floating">
+    <>
+   {props.msg ?( <div class="form-floating">
         <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
         <label htmlFor="floatingTextarea">{props.message}</label>
-    </div>
+    </div>) : ("")}
+    </>
   )
 }
 
 //change class to className and for to htmlFor in jsx
                     
-Textarea.propTypes={message: PropTypes.string};
+Todo.propTypes={message: PropTypes.string,
+                msg: PropTypes.bool.isRequired
+};
 
-Textarea.defaultProps={message: "Enter text here"};
+Todo.defaultProps={message: "Enter text here",
+                   msg: true};
