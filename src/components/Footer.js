@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 
 export default function Footer(props) {
   return (
-    <div>
-      <h3>{props.title}</h3>
+    <div class='footer'>
+      <p className='text-center'>Copyright My TodoList.com</p>
     </div>
   )
 }
