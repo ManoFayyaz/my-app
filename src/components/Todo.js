@@ -1,22 +1,19 @@
 import React from "react";
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
+import TodoItem from "../components/TodoItem";
 
 export default function Todo(props) {
   return (
     <>
-   {props.msg ?( <div class="form-floating">
-        <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-        <label htmlFor="floatingTextarea">{props.message}</label>
-    </div>) : ("")}
+      <div className="container">
+        <h3 className="todo_heading"><b>Todo List</b></h3>
+        {props.todo.map((t)=>{
+          return <TodoItem todo={t} key={t.id} onDelete={props.onDelete}/>
+        })}
+      </div>
     </>
   )
 }
 
 //change class to className and for to htmlFor in jsx
                     
-Todo.propTypes={message: PropTypes.string,
-                msg: PropTypes.bool.isRequired
-};
-
-Todo.defaultProps={message: "Enter text here",
-                   msg: true};
