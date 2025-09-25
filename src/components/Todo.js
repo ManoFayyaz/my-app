@@ -7,11 +7,14 @@ export default function Todo(props) {
     <>
       <div className="container">
         <h3 className="todo_heading"><b>Todo List</b></h3>
+        
         {props.todo.length===0 ? "No Todos to display" :
         props.todo.map((t)=>{
-          return <TodoItem todo={t} key={t.id} onDelete={props.onDelete}/>
+          return <TodoItem todo={t} key={t.id} onDelete={props.onDelete} onEdit={props.onEdit} />
         })
         }
+       
+
       </div>
     </>
   )

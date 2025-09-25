@@ -4,7 +4,14 @@ import Navbar from './components/Navbar';
 import Todo from "./components/Todo";
 import Footer from './components/Footer';
 import AddTodo from './components/AddTodo';
+import About from './components/About';
+import EditBox from './components/EditBox';
 import { useState } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes
+} from "react-router-dom";
 
 function App() {
 
@@ -35,6 +42,44 @@ function App() {
     //lets your component remember values between renders: useState
     //state of an array and update the array
 
+
+  
+const [editItem, setEditItem] = useState(null);
+const [editTitle, setEditTitle] = useState("");
+const [editDesc, setEditDesc] = useState("");
+const [showModal, setshowModal] = useState(false);
+
+const onEdit = (item) => {
+  setEditItem(item);
+  setEditTitle(item.title);
+  setEditDesc(item.desc);
+  setshowModal(true);
+};
+
+const saveEdit = () => {
+  if (!editTitle || !editDesc) {
+    alert("Title or Description cannot be blank");
+    return;
+  }
+
+  const updatedTodo = { ...editItem, title: editTitle, desc: editDesc };
+
+  const updatedTodos = todo.map((t) =>
+    t.id === editItem.id ? updatedTodo : t
+  );
+
+  setTodo(updatedTodos);
+  setEditItem(null);
+  setshowModal(false); 
+
+};
+
+const CancelEdit = () => {
+ setEditItem(null);
+ setshowModal(false);
+
+};
+
   const[todo,setTodo]=useState([
     {id:1, 
      title:"Go to the market", 
@@ -43,15 +88,40 @@ function App() {
       title:"Go to the mall",
       desc:"You need to go to the mall to buy clothes"}
   ]);
+  
 
   return (
     <>
+     <Router>
       <Navbar title="Todo List" about="About Todo List" /> 
-      <AddTodo AddTodo={addTodo}/>
-      <Todo todo={todo} onDelete={onDelete}/>
+      <Routes>
+        <Route  path="/"
+          element={
+            <>
+              <AddTodo AddTodo={addTodo} />
+              <Todo todo={todo} onDelete={onDelete} onEdit={onEdit} />
+              <EditBox
+                show={showModal}
+                title={editTitle}
+                desc={editDesc}
+                setTitle={setEditTitle}
+                setDesc={setEditDesc}
+                onSave={saveEdit}
+                onCancel={CancelEdit}
+              />
+            </>
+          }
+        />
+           
+      <Route path="/about"
+        element={<About />} 
+        ></Route>
+      </Routes>
       
-      <Footer title="Footer"/>
-  </>
+   
+      <Footer title="Footer" />
+    </Router>
+    </>
   );
 }
  //props
