@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import AddTodo from './components/AddTodo';
 import About from './components/About';
 import EditBox from './components/EditBox';
+import TodoState from './context/todoFile/TodoState';
 import { useState } from 'react';
 import {
   BrowserRouter as Router,
@@ -94,6 +95,7 @@ const CancelEdit = () => {
     <>
      <Router>
       <Navbar title="Todo List" about="About Todo List" /> 
+
       <Routes>
         <Route  path="/"
           element={
@@ -112,12 +114,14 @@ const CancelEdit = () => {
             </>
           }
         />
-           
-      <Route path="/about"
-        element={<About />} 
-        ></Route>
-      </Routes>
-      
+       </Routes>
+
+      <TodoState>
+        <Routes>
+          <Route path="/about" element={<About />} />
+        </Routes>
+    </TodoState>
+
    
       <Footer title="Footer" />
     </Router>
