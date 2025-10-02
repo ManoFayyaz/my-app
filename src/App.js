@@ -19,6 +19,7 @@ import {
 function App() {
 
   const[todo,setTodo]=useState([]);
+
   useEffect(() => {
     axios.get("http://127.0.0.1:5000/todos")
       .then((res) => {
@@ -54,7 +55,7 @@ const addTodo = (title, desc) => {
     .then((res) => {
       // backend returns {id, title, desc}
       const newTodo = {
-        id: res.data.id,       // ✅ take correct backend id
+        id: res.data.id,       // take correct backend id
         title: res.data.title,
         desc: res.data.desc
       };
@@ -64,6 +65,7 @@ const addTodo = (title, desc) => {
         ...t,
         uiIndex: index + 1
       }));
+
       setTodo(withUiIndex);
     })
     .catch((err) => console.error(err));
@@ -101,10 +103,12 @@ const saveEdit = () => {
           ? { ...t, title: editTitle, desc: editDesc } // keep id and uiIndex intact
           : t
       );
+      
       const withUiIndex = updatedTodos.map((t, index) => ({
         ...t,
         uiIndex: index + 1
       }));
+
       setTodo(withUiIndex);
       setEditItem(null);
       setshowModal(false);
