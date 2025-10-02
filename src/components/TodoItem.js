@@ -4,7 +4,7 @@ import React from 'react'
 export default function TodoItem({todo,onDelete,onEdit}) {
   return (
     <div>
-      <p><i><b>{todo.id}</b></i></p>
+      <p><i><b>{todo.uiIndex}</b></i></p>
       <h4>{todo.title}</h4>
       <p>{todo.desc}</p>
       <button className="btn btn-sm btn-danger" onClick={()=>{onDelete(todo)}}>Delete</button>
